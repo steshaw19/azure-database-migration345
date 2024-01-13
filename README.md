@@ -1,34 +1,93 @@
-# Azure Database Migration Project
-## Windows Virtual Machine Setup for Production Environment
-This section documents the process of setting up a Windows Virtual Machine (VM) to serve as the cornerstone of the production environment. The VM emulates the functions of a Windows server, replicating the operations of an on-premise system within a company and provides a secure and dedicated data storage solution.
+# Azure Database Migration Project Milestone Achievements README
 
-## VM Setup
-The following information provides insight into how the VM was set up for this project. Before logging into the cloud, it is imperitive that two-factor-authorisation is enabled to prevent security breaches.
+## Overview
 
-1. After logging into Microsoft Azure, AiCore Users was moved to the current directory by clicking the profile icon on the top right when in Azure & "switch directory". This allows access to the AiCore Cloud subscription to create resources.
-2. Next, I navigated to the Virtual Machines section. The AiCore Cloud will be selected as default. Keep this setting and name the resource group to store the resources. In this case, the resource group was assigned `database-migration`to match the purpose of the project.
-3. A name was assigned to the virtual machine and the closest location `UK South` was chosen. Defaults were kept for availibility options and zones, as well as the security type.
-4. The type of machine and size was then chosen to be able to process the databases efficiently and effectively: `Windows 10 Pro, version 22H2 - x64 Gen2` and ` Standard_D4s_v3 - 4 vcpus, 16 GiB memory`
-5. Finally, an administrator username and password was set and `RDP (3389)` inbound port was selected to allow a connection to a virtual machine.
-6. Confirm the selection by clicking **review + create**. Once it has been validated, **create** can be clicked to begin deployment.
+Welcome to the README file detailing the achievements in this project. In this document, I'll provide detailed insights into the project. 
 
-## Initiating VM
-1. The first step is to open Remote Desktop Connetion on the local machine. This is installed as default on Windows devices.
-2. Now, click **connect** on the virtual machine instance created in the previous setup.
-3. Select **Native RDP**. Once it has validated, download the RDP file.
-4. Open the RDP file and add the administrator username and password assigned in the previous setup.
+### Project Diagram:
+The following link provides a visual representation of the project.
 
-## Installing SQL Server & SQL Server Management Studio (SSMS)
-### SQL Server
-1. Download the SQL Server [download wizard](https://go.microsoft.com/fwlink/p/?linkid=2215158&clcid=0x809&culture=en-gb&country=gb)
-2. Run the file and choose basic setup.
-### SSMS
-1. Once the wizard has completed the installation, it provides an option to install SSMS. Clicking this will direct you to the Microsoft website. Download the file for SSMS 19.2 which includes Azure Data Studio installation.
-2. When first opening SSMS, it requests that the server type, server name, and authentification type are assigned. This may be autofilled, and if this is the case you can leave as default. If not, set server type as `Database Engine`, server name as the name of the virtual machine, and choose `Windows Authentification` which is the username and password assigned when creating the virtual machine.
 
-## Create the Production Database
-This project uses the SQL Server Database [AdventureWorks](https://aicore-portal-public-prod-307050600709.s3.eu-west-1.amazonaws.com/project-files/93dd5a0c-212d-48eb-ad51-df521a9b4e9c/AdventureWorks2022.bak) to simulate a fictional manufacturing company's operations. First download the AdventureWorks database using the above link and then follow the steps below to restore the database on your server:
-1. First, make sure that the `AdventureWorks` file is saved in the correct folder for restoration: `"C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Backup"`
-2. Open SQL Server Management Studio (SSMS) and connect to the SQL Server instance for the virtual machine.
-3. Right-click on the Databases node in the Object Explorer, and then choose `Restore Database...`.
-4. In the Restore Database window, choose the `Device` option and click the `...` button to select the backup files to restore. Click the `Add` button to navigate to the location of the backup files. Check that all the details of the file location are correct and then confirm. All tables and data should now be available to query.
+[Lucid Flowchart](https://lucid.app/lucidchart/847765c6-6475-45be-a891-a164e176f618/edit?viewport_loc=-3893%2C-2034%2C3922%2C1582%2C0_0&invitationId=inv_56cfd0bf-2834-489f-9c9a-8e60ded42e51)
+
+## Virtual Machine Setup
+
+### 1. Azure Virtual Machine Configuration
+
+The Virtual Machine (VM) setup is optimized for performance and security on the Azure cloud platform. Key configurations include appropriate VM sizing, networking settings, and security. SQL Server and SQL Server Management Studio (SSMS) were installed on the VM. Using VMs provides easy scalability when required and extra security and protection through Azure Cloud Services. 
+
+## Migration to Azure SQL Database
+
+### 1. Seamless Migration
+
+The AdventureWorks database was successfully migrated from a localhost database to Azure SQL Database, ensuring minimal downtime and no data loss during the transition.
+
+With Azure SQL Database, we have experienced improved performance and scalability, allowing our application to handle increased workloads and deliver a more responsive user experience.
+
+## Azure SQL Database Configuration
+
+### 1. Server Configuration
+
+I configured the Azure SQL Database server with the appropriate resources, including vCores, storage, and memory, to meet the performance requirements of our application.
+
+### 2. Security Measures
+
+Implemented robust security measures, including firewall rules, Virtual Network Service Endpoints, and SQL authentification, to safeguard our database from unauthorized access.
+
+## Migration Process
+
+### 1. Assessment and Planning
+
+Before migration, I conducted a thorough assessment of the existing database's tables and schema to identify dependencies, performance bottlenecks, and potential challenges. This information guided the migration plan.
+
+### 2. Schema and Data Migration
+
+Azure Database Migration Service was used to migrate the database schema and data. This automated process significantly reduced migration time and minimized manual errors.
+
+## Backup Process
+
+### 1. Meticulous Backup Strategy
+
+A meticulous backup strategy to ensure the safety and integrity of our data was implemented. This strategy includes regular full backups and reports to minimize data loss and recovery time objectives.
+
+## Automated Backups via Maintenance Plans in SSMS
+
+### 1. Maintenance Plans Configuration
+
+I leveraged SQL Server Management Studio (SSMS) Maintenance Plans to automate the backup process. The plan is configured to execute a scheduled weekly full backup, which provides a hands-off approach to data protection. These backups are saved in Azure Data Storage containers and can be accessed, with their reports, through the Azure Portal.
+
+### 2. Monitoring and Notifications
+
+The maintenance Plans include monitoring and notification features to alert me in case of any backup failures or issues. This proactive approach allows me to address potential problems swiftly, ensuring the reliability of our backup strategy.
+
+## Secure Storage in Azure Blob Storage
+
+### 1. Azure Blob Storage Integration
+
+Backups are securely stored in Azure Blob Storage, leveraging its durability and redundancy features. Azure Blob Storage provides a scalable and cost-effective solution for storing our critical data, with seamless integration into our backup and restoration processes.
+
+### 2. Encryption and Access Controls
+
+Utilizing Azure Blob Storage's encryption capabilities, we ensure that our backups are encrypted at rest and during transit. Access controls and role-based permissions are configured to restrict unauthorized access to the stored backups, enhancing overall data security.
+
+### 3. Disaster Recovery
+
+To test the backup strategy, disaster data loss was mimicked through deletion of key data using the code:
+
+```SQL
+UPDATE TOP(1000) Password.Person
+SET PasswordHash = 0
+```
+The backup strategy enabled an efficient and successful restoration without any data loss.
+
+### 4. Geo-Replication Setup
+
+I configured geo-replication to ensure data redundancy and high availability across multiple geographic regions. Leveraging Azure SQL Database's built-in geo-replication features, we established replication links between the primary and secondary databases in different Azure regions.
+
+### 5. Failover Resilience
+
+Geo-replication proved highly effective in ensuring failover resilience. Automatic failovers were seamless and database connection was successful in both regions without data loss.
+
+## Microsoft Entra ID
+
+Finally, Microsoft Entra ID was utitlised to increase security and permissions of users. Admin and Reader accounts were created and tested to ensure the correct roles for each type of account.
